@@ -1,5 +1,5 @@
 from app.db.base import Base
-from sqlalchemy import Column, Integer, DateTime, ForeignKey, UUID, DECIMAL, Text, UniqueConstraint
+from sqlalchemy import Column, Integer, DateTime, ForeignKey, UUID, Text, UniqueConstraint, Numeric
 from sqlalchemy.orm import relationship
 from app.utils.time import now_local
 
@@ -44,7 +44,7 @@ class Order(Base):
         onupdate=now_local
     )
     total_price = Column(
-        DECIMAL,
+        Numeric(12, 2),
         nullable=False
     )
     comment = Column(Text)
@@ -94,7 +94,7 @@ class OrderProduct(Base):
         back_populates='order_links'
     )
     price = Column(
-        DECIMAL,
+        Numeric(12, 2),
         nullable=False
     )
     amount = Column(

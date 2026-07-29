@@ -1,5 +1,5 @@
 from app.db.base import Base
-from sqlalchemy import Column, Integer, String, Boolean, DateTime, DECIMAL, Text, CheckConstraint
+from sqlalchemy import Column, Integer, String, Boolean, DateTime, Text, CheckConstraint, Numeric
 from sqlalchemy.orm import relationship
 from app.utils.time import now_local
 
@@ -25,7 +25,7 @@ class Product(Base):
     )
     description = Column(Text)
     price = Column(
-        DECIMAL,
+        Numeric(12, 2),
         nullable=False
     )
     discount = Column(Integer)
