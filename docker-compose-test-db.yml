@@ -1,0 +1,12 @@
+services:
+  db-e-commerce-app-test:
+    image: postgres:13.0-alpine
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_PASSWORD: pass
+      POSTGRES_USER: user
+      POSTGRES_DB: db
+    restart: always
+    volumes:
+      - ./db_data_test:/var/lib/postgresql/data/
