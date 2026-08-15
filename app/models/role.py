@@ -1,5 +1,6 @@
 from app.db.base import Base
 from sqlalchemy import Column, Integer, String, Boolean, DateTime
+from sqlalchemy.orm import relationship
 from app.utils.time import now_local
 
 
@@ -33,3 +34,5 @@ class Role(Base):
         default=now_local,
         onupdate=now_local
     )
+
+    users = relationship('User', back_populates='role')

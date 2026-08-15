@@ -54,16 +54,6 @@ class Order(Base):
         back_populates='order'
     )
     status = relationship('OrderStatus')
-    client = relationship(
-        'User',
-        foreign_keys='Order.client_id',
-        back_populates='order_as_client'
-    )
-    manager = relationship(
-        'User',
-        foreign_keys='Order.manager_id',
-        back_populates='order_as_manager'
-    )
     shipping = relationship('Shipping')
 
 class OrderProduct(Base):

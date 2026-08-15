@@ -2,7 +2,6 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 from pydantic import Field, computed_field
 from sqlalchemy import URL
 from pathlib import Path
-import os
 
 ROOT_DIR = Path(__file__).resolve().parent.parent.parent
 ENV_FILE = Path(ROOT_DIR, ".env")

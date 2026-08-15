@@ -24,7 +24,8 @@ class User(Base):
     )
     email = Column(
         String(255),
-        unique=True
+        unique=True,
+        nullable=False
     )
     role_id = Column(
         Integer,
@@ -34,7 +35,11 @@ class User(Base):
         String,
         nullable=False
     )
-    is_active = Column(Boolean)
+    is_active = Column(
+        Boolean,
+        default=True,
+        nullable=False
+    )
     created_at = Column(
         DateTime(timezone=True),
         default=now_local
@@ -44,12 +49,4 @@ class User(Base):
         default=now_local,
         onupdate=now_local
     )
-
-    order_as_client = relationship(
-        'Order',
-        back_populates='client'
-    )
-    order_as_manager = relationship(
-        'Order',
-        back_populates='manager'
-    )
+    role = relationship('Role', back_populates='users')
