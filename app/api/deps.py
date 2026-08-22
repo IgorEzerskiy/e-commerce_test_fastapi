@@ -7,10 +7,16 @@ from app.core.security import jwt_decode
 from sqlalchemy.orm import selectinload
 from sqlalchemy import select
 from app.db.session import db_dependency
+
 from app.repositories.user import UserRepository
 from app.services.auth import AuthService
+
 from app.repositories.category import CategoryRepository
 from app.services.category import CategoryService
+
+from app.repositories.role import RoleRepository
+from app.services.role import RoleService
+
 
 #----USER DEPS----
 
@@ -79,7 +85,7 @@ def get_auth_service(repo: Annotated[UserRepository, Depends(get_user_repo)]) ->
 
 auth_service = Annotated[AuthService, Depends(get_auth_service)]
 
-#----CATEGORY DEP----
+#----CATEGORY DEPS----
 
 def get_category_repo(db: db_dependency) -> CategoryRepository:
     return CategoryRepository(db)
@@ -88,3 +94,13 @@ def get_category_service(repo: Annotated[CategoryRepository, Depends(get_categor
     return CategoryService(repo)
 
 category_service = Annotated[CategoryService, Depends(get_category_service)]
+
+#----ROLE DEPS----
+
+def get_role_repo(db: db_dependency) -> RoleRepository:
+    return RoleRepository(db)
+
+def get_role_service(repo: Annotated[RoleRepository, Depends(get_role_repo)]) -> RoleService:
+    return RoleService(repo)
+
+role_service = Annotated[RoleService, Depends(get_role_service)]

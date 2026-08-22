@@ -7,7 +7,7 @@ logger = get_logger(__name__)
 
 router = APIRouter()
 
-@router.post("/", response_model=CategoryCreate, status_code=status.HTTP_201_CREATED)
+@router.post("/", response_model=CategoryRead, status_code=status.HTTP_201_CREATED)
 def create_category(
         user: superuser_deps,
         service: category_service,

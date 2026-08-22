@@ -5,7 +5,7 @@ from pathlib import Path
 from logging.handlers import WatchedFileHandler
 from pythonjsonlogger.jsonlogger import JsonFormatter
 from typing import Optional
-from app.core.config import config
+from app.core.config import config, ROOT_DIR
 
 
 class UnicodeJsonFormatter(JsonFormatter):
@@ -14,7 +14,7 @@ class UnicodeJsonFormatter(JsonFormatter):
 
 def setup_logging(
     level: int = logging.DEBUG,
-    log_file: str = "e-commerce_test_fastapi.log",
+    log_file: str = f"{ROOT_DIR}/logs/e-commerce_test_fastapi.log",
 ) -> None:
     """Setup logging configuration"""
 
