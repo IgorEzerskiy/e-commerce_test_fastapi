@@ -9,7 +9,10 @@ from sqlalchemy import select
 from app.db.session import db_dependency
 from app.repositories.user import UserRepository
 from app.services.auth import AuthService
+from app.repositories.category import CategoryRepository
+from app.services.category import CategoryService
 
+#----USER DEPS----
 
 oauth2_bearer = OAuth2PasswordBearer(tokenUrl="/v1/auth/token")
 
@@ -66,6 +69,8 @@ current_user_deps = Annotated[User, Depends(get_current_user)]
 staff_user_deps = Annotated[User, Depends(require_staff)]
 superuser_deps = Annotated[User, Depends(require_superuser)]
 
+#----AUTH DEPS----
+
 def get_user_repo(db: db_dependency) -> UserRepository:
     return UserRepository(db)
 
@@ -73,3 +78,13 @@ def get_auth_service(repo: Annotated[UserRepository, Depends(get_user_repo)]) ->
     return AuthService(repo)
 
 auth_service = Annotated[AuthService, Depends(get_auth_service)]
+
+#----CATEGORY DEP----
+
+def get_category_repo(db: db_dependency) -> CategoryRepository:
+    return CategoryRepository(db)
+
+def get_category_service(repo: Annotated[CategoryRepository, Depends(get_category_repo)]) -> CategoryService:
+    return CategoryService(repo)
+
+category_service = Annotated[CategoryService, Depends(get_category_service)]

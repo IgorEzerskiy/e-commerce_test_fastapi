@@ -35,6 +35,11 @@ class Category(Base):
         Text,
         nullable=False
     )
+    slug = Column(
+        String(255),
+        nullable=False,
+        unique=True
+    )
     created_at = Column(
         DateTime(timezone=True),
         default=now_local

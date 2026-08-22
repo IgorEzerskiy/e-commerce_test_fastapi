@@ -11,3 +11,4 @@ python-json-logger==3.3.0
 python-dotenv==1.0.0
 pydantic-settings==2.14.2
 python-jose==3.5.0
+python-slugify==8.0.4

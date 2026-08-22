@@ -1,4 +1,4 @@
-from typing import Optional, Sequence
+from typing import Optional
 from app.repositories.base import BaseRepository
 from app.models.user import User
 

@@ -13,10 +13,11 @@ class BaseRepository(Generic[ModelType]):
     def get(self, id: int) -> Optional[ModelType]:
         return self.db.get(self.model, id)
 
-    def list(self, skip: int = 0, limit: int = 20) -> Sequence[ModelType]:
-        result = self.db.execute(
-            select(self.model).offset(skip).limit(limit)
-        )
+    def list(self, skip: int = 0, limit: int | None = 20) -> Sequence[ModelType]:
+        query = select(self.model).offset(skip)
+        if limit is not None:
+            query = query.limit(limit)
+        result = self.db.execute(query)
         return result.scalars().all()
 
     def create(self, obj: ModelType) -> ModelType:
